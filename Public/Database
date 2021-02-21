@@ -1,0 +1,22 @@
+database: 'reservationsdemo'
+
+Command for venue table:
+
+CREATE TABLE IF NOT EXISTS venue (venueid SERIAL PRIMARY KEY,
+venuename TEXT NOT NULL, fulladdress TEXT NOT NULL,
+contactmail TEXT NOT NULL);
+
+Command for event table:
+
+CREATE TABLE IF NOT EXISTS event (eventid SERIAL PRIMARY KEY,
+name TEXT NOT NULL, startingdate TEXT NOT NULL,
+endingdate TEXT NOT NULL,
+ticketprice REAL NOT NULL, venueid INT NOT NULL,
+CONSTRAINT fk_venue FOREIGN KEY(venueid) REFERENCES venue (venueid));
+
+Command for attendee table:
+
+CREATE TABLE IF NOT EXISTS attendee (attendeeid SERIAL PRIMARY KEY,
+fullname TEXT NOT NULL, company TEXT NOT NULL, experience INT NOT NULL,
+email TEXT NOT NULL, eventid INT NOT NULL,
+CONSTRAINT fk_event FOREIGN KEY(eventid) REFERENCES event (eventid));
